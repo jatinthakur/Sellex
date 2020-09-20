@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Add a Product</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/home'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="SellerForm" (ngSubmit)="SubmitData()">
+  <ion-item>
+    <ion-label position="floating">Enter Seller Name:</ion-label>
+    <ion-input type="text" formControlName="name" class="form-control"></ion-input>
+    <span style="color:red" *ngIf="SellerForm.controls['name'].invalid&&SellerForm.controls['name'].touched">Please enter a name !</span>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating"> Enter Product Name:</ion-label>
+    <ion-input type="text" formControlName="productname" class="form-control"></ion-input>
+    <span style="color:red" *ngIf="SellerForm.controls['productname'].invalid&&SellerForm.controls['productname'].touched">Please enter product name !</span>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Select Gender:</ion-label>
+  </ion-item>
+
+  <ion-radio-group formControlName="gender" class="form-control">
+    <ion-item>
+      <ion-label>MALE</ion-label>
+      <ion-radio slot="start" value="Male"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>FEMALE</ion-label>
+      <ion-radio slot="start" value="Female"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-item>
+    <ion-button (click)="PresentActionSheet()"><ion-icon name="aperture" slot="start"></ion-icon>ADD PICTURE</ion-button>
+    <ion-img [src]="imageUrl" *ngIf="imageUrl"></ion-img>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Enter Price:</ion-label>
+    <ion-input type="number" formControlName="price" class="form-control"></ion-input>
+  </ion-item>
+
+
+  <ion-card>
+    <ion-card-header style="color:black;font-size:18px"><b>Specifications:</b></ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Brand New</ion-label>
+        <ion-checkbox formControlName="checkbox1" class="form-control" (ionChange)="option1('Brand New',$event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Is in good condition</ion-label>
+        <ion-checkbox formControlName="checkbox2" class="form-control"  (ionChange)="option2('Is in good condition',$event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Price Negotiable</ion-label>
+        <ion-checkbox formControlName="checkbox3" class="form-control" (ionChange)="option3('Price Negotiable',$event)"></ion-checkbox>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-button type="submit" [disabled]="!SellerForm.valid">Submit</ion-button>
+</form>
+</ion-content>
